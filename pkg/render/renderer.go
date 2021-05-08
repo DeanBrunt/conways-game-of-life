@@ -21,6 +21,8 @@ func New(win *pixelgl.Window) *Renderer {
 }
 
 func (r *Renderer) RenderNextGridFrame(gridFrame grid.Grid) {
+	r.imd.Clear()
+
 	lineThickness := 1
 	horizontalLinesRequired := len(gridFrame) - 1
 	heightRequiredForHorizLines := horizontalLinesRequired * lineThickness

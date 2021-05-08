@@ -22,7 +22,7 @@ func run() {
 		panic(err)
 	}
 
-	grid := grid.NewGrid(50, 50)
+	grid := grid.NewGrid(25, 25)
 	renderer := render.New(win)
 
 	i := 0
