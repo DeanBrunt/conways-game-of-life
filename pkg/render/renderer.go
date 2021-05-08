@@ -80,5 +80,5 @@ func drawSquare(imd *imdraw.IMDraw, x, y int, lineThickness, squareHeight, squar
 	imd.Push(topLeftVec.Add(pixel.V(squareWidth, 0)))
 	imd.Color = colornames.Red
 	imd.Push(topLeftVec.Add(pixel.V(squareWidth, -1*squareHeight)))
-	imd.Polygon(0)
+	imd.Rectangle(0)
 }
