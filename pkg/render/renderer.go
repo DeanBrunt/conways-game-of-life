@@ -28,13 +28,28 @@ func (r *Renderer) RenderNextGridFrame(gridFrame grid.Grid) {
 	remainingHeight := r.win.Bounds().H() - float64(heightRequiredForHorizLines)
 	verticalGridSpacing := remainingHeight / float64(len(gridFrame))
 
-	verticalCursor := verticalGridSpacing
+	verticalCursor := verticalGridSpacing + float64(lineThickness)
 	for i := 0; i < horizontalLinesRequired; i++ {
 		r.imd.Color = colornames.White
 		r.imd.EndShape = imdraw.RoundEndShape
-		r.imd.Push(pixel.V(0, verticalCursor), pixel.V(600, verticalCursor))
+		r.imd.Push(pixel.V(0, verticalCursor), pixel.V(r.win.Bounds().W(), verticalCursor))
 		r.imd.Line(float64(lineThickness))
-		verticalCursor += verticalGridSpacing
+		verticalCursor += verticalGridSpacing + float64(lineThickness)
+	}
+
+	verticalLinesRequired := len(gridFrame[0]) - 1
+	heightRequiredForVerticLines := verticalLinesRequired * lineThickness
+
+	remainingWidth := r.win.Bounds().W() - float64(heightRequiredForVerticLines)
+	horizontalGridSpacing := remainingWidth / float64(len(gridFrame[0]))
+
+	horizontalCursor := horizontalGridSpacing + float64(lineThickness)
+	for i := 0; i < horizontalLinesRequired; i++ {
+		r.imd.Color = colornames.White
+		r.imd.EndShape = imdraw.RoundEndShape
+		r.imd.Push(pixel.V(horizontalCursor, 0), pixel.V(horizontalCursor, r.win.Bounds().H()))
+		r.imd.Line(float64(lineThickness))
+		horizontalCursor += horizontalGridSpacing + float64(lineThickness)
 	}
 
 	r.win.Clear(colornames.Black)

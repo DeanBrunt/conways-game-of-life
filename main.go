@@ -14,7 +14,7 @@ func main() {
 func run() {
 	cfg := pixelgl.WindowConfig{
 		Title:  "Conway's Game of Life",
-		Bounds: pixel.R(0, 0, 1024, 768),
+		Bounds: pixel.R(0, 0, 1024, 1024),
 		VSync:  true,
 	}
 	win, err := pixelgl.NewWindow(cfg)
@@ -22,7 +22,7 @@ func run() {
 		panic(err)
 	}
 
-	grid := grid.NewGrid(100, 100)
+	grid := grid.NewGrid(50, 50)
 	renderer := render.New(win)
 
 	for !win.Closed() {
