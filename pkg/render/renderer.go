@@ -56,7 +56,7 @@ func (r *Renderer) RenderNextGridFrame(gridFrame grid.Grid) {
 	for i := 0; i < len(gridFrame); i++ {
 		for j := 0; j < len(gridFrame[i]); j++ {
 			if gridFrame[i][j] {
-				drawSquare(r.imd, i, j, float64(lineThickness), verticalGridSpacing, horizontalGridSpacing, r.win.Bounds().H(), r.win.Bounds().W())
+				drawSquare(r.imd, j, i, float64(lineThickness), verticalGridSpacing, horizontalGridSpacing, r.win.Bounds().H(), r.win.Bounds().W())
 			}
 		}
 	}
