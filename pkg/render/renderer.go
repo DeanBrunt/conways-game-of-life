@@ -20,7 +20,7 @@ func New(win *pixelgl.Window) *Renderer {
 	}
 }
 
-func (r *Renderer) RenderNextGridFrame(gridFrame grid.Grid) {
+func (r *Renderer) RenderGridFrame(gridFrame grid.Grid) {
 	r.imd.Clear()
 
 	lineThickness := 1

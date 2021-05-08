@@ -1,6 +1,8 @@
 package main
 
 import (
+	"time"
+
 	"github.com/DeanBrunt/conways-game-of-life/pkg/grid"
 	"github.com/DeanBrunt/conways-game-of-life/pkg/render"
 	"github.com/faiface/pixel"
@@ -22,15 +24,17 @@ func run() {
 		panic(err)
 	}
 
-	grid := grid.NewGrid(25, 25)
+	curGrid := grid.NewGrid(50, 50)
 	renderer := render.New(win)
-	grid[0][1] = true
-	grid[1][2] = true
-	grid[2][0] = true
-	grid[2][1] = true
-	grid[2][2] = true
+	curGrid[0][1] = true
+	curGrid[1][2] = true
+	curGrid[2][0] = true
+	curGrid[2][1] = true
+	curGrid[2][2] = true
 
 	for !win.Closed() {
-		renderer.RenderNextGridFrame(grid)
+		renderer.RenderGridFrame(curGrid)
+		curGrid = grid.CalculateNextGrid(curGrid)
+		time.Sleep(100 * time.Millisecond)
 	}
 }
