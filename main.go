@@ -24,21 +24,13 @@ func run() {
 
 	grid := grid.NewGrid(25, 25)
 	renderer := render.New(win)
+	grid[0][1] = true
+	grid[1][2] = true
+	grid[2][0] = true
+	grid[2][1] = true
+	grid[2][2] = true
 
-	i := 0
-	j := 0
 	for !win.Closed() {
 		renderer.RenderNextGridFrame(grid)
-		grid[i][j] = !grid[i][j]
-		if j+1 == len(grid[0]) {
-			j = 0
-			if i+1 == len(grid) {
-				i = 0
-				continue
-			}
-			i++
-			continue
-		}
-		j++
 	}
 }
