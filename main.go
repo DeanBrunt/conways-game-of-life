@@ -23,6 +23,9 @@ func run() {
 	}
 
 	grid := grid.NewGrid(50, 50)
+	grid[0][0] = true
+	grid[0][1] = true
+	grid[1][0] = true
 	renderer := render.New(win)
 
 	for !win.Closed() {

@@ -52,7 +52,33 @@ func (r *Renderer) RenderNextGridFrame(gridFrame grid.Grid) {
 		horizontalCursor += horizontalGridSpacing + float64(lineThickness)
 	}
 
+	// Now the squares...
+	for i := 0; i < len(gridFrame); i++ {
+		for j := 0; j < len(gridFrame[i]); j++ {
+			if gridFrame[i][j] {
+				drawSquare(r.imd, i, j, float64(lineThickness), verticalGridSpacing, horizontalGridSpacing, r.win.Bounds().H(), r.win.Bounds().W())
+			}
+		}
+	}
+
 	r.win.Clear(colornames.Black)
 	r.imd.Draw(r.win)
 	r.win.Update()
+}
+
+func drawSquare(imd *imdraw.IMDraw, x, y int, lineThickness, squareHeight, squareWidth, windowHeight, windowWidth float64) {
+	topLeftVec := pixel.V(
+		float64(x)*squareWidth+float64(x)*lineThickness,
+		windowHeight-float64(y)*squareHeight-float64(y)*lineThickness,
+	)
+
+	imd.Color = colornames.Red
+	imd.Push(topLeftVec)
+	imd.Color = colornames.Red
+	imd.Push(topLeftVec.Sub(pixel.V(0, squareHeight)))
+	imd.Color = colornames.Red
+	imd.Push(topLeftVec.Add(pixel.V(squareWidth, 0)))
+	imd.Color = colornames.Red
+	imd.Push(topLeftVec.Add(pixel.V(squareWidth, -1*squareHeight)))
+	imd.Polygon(0)
 }
